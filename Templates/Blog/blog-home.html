@@ -90,7 +90,6 @@
 							<div class="single-post row">
 								<div class="col-lg-3  col-md-3 meta-details">
 									<ul class="tags">
-										<li><a href="#">Food,</a></li>
 										{% for cat in post.category.all %}
 											<li><a href="#">{{ cat.name }}</a> {% if not forloop.last %},{% endif %}</li>
 										{% endfor %}
@@ -109,11 +108,10 @@
 									<a class="posts-title" href='/blog/{{post.id}}'><h3>{{post.title}}</h3></a>
 									<p class="excert">
 										{{post.content|truncatechars:200 }}
-										{{post.image.url}}
 
 										
 									</p>
-									<a href="blog-single.html" class="primary-btn">View More</a>
+									<a href="/blog/{{post.id}}" class="primary-btn">View More</a>
 								</div>
 							</div>
 							{% endfor %}														
