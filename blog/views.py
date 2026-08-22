@@ -1,21 +1,33 @@
-from django.shortcuts import render ,get_object_or_404
-from blog.models import Post
+from django.core.paginator import Paginator
+from django.shortcuts import render, get_object_or_404
+from blog.models import Post, category as Category
 
-# Create your views here.
 
-
-def blog_view(request):
+def blog_view(request,cat_name=None,author_username=None):
     posts = Post.objects.filter(status=1)
-    context = {'posts':posts}
+    if cat_name:    
+        posts = Post.objects.filter(category__name=cat_name)
+    if author_username:
+        posts = posts.filter(author__username = author_username)
+    context = {'posts': posts}
+
     return render(request,'blog/blog-home.html',context)
 
 
+def blog_single(request, pid):
+    post = get_object_or_404(Post, pk=pid, status=1)
 
-def blog_single(request,pid):
-    post = get_object_or_404(Post,pk=pid,status=1)
-    context = {'post':post}
-    return render(request,'blog/blog-single.html',context)
+    context = {
+        'post': post
+    }
+
+    return render(request, 'blog/blog-single.html', context)
 
 
 def test(request):
-    return render(request,'test.html')
+    return render(request, 'test.html')
+
+def blog_category(request, cat_name):
+    posts = Post.objects.filter(category__name__iexact=cat_name,status=1)
+    context = {'posts': posts,}
+    return render(request, 'blog/blog-home.html', context)
