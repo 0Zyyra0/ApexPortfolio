@@ -18,12 +18,26 @@ from django.urls import path ,include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf import settings
-from django.conf.urls.static import static 
+from django.contrib.sitemaps.views import sitemap 
+from Lewis44.sitemaps import StaticViewSitemap
+from blog.sitemaps import BlogSitemap
+
+sitemaps = {
+    'static': StaticViewSitemap,
+    'blog':BlogSitemap
+}
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path ( 'url address' , ' view ' )
     path('blog/', include('blog.urls', namespace='blog')),
     path('', include('Lewis44.urls', namespace='website')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+         name='django.contrib.sitemaps.views.sitemap'),
+    path('robots.txt', include('robots.urls')),
+    path('captcha/', include('captcha.urls')),
+
 
 
 ]

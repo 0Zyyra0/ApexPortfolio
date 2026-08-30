@@ -31,16 +31,42 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'multi_captcha_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+    'robots',
+    'taggit',
+    'django_extensions',
+    'django.contrib.sites',
+    'captcha',
+    'django.contrib.sitemaps',
     'Lewis44.apps.Lewis44Config',
-    'blog'
-
+    'blog',
 ]
+
+#sites framework
+SITE_ID = 2
+
+
+#robots
+ROBOTS_USE_HOST = True
+ROBOTS_USE_SITEMAP = True
+
+
+
+# captcha admin settings
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'simple-captcha',
+}
+
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -75,6 +101,10 @@ WSGI_APPLICATION = 'Hamilton.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+
+
+
+
 
 DATABASES = {
     'default': {

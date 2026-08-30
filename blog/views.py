@@ -1,5 +1,7 @@
 from django.core.paginator import Paginator
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
+from Hamilton.forms import NameForm , contactForm
 from blog.models import Post, category as Category
 
 
@@ -42,8 +44,15 @@ def blog_single(request, pid):
 
 
 def test(request):
+    if request.method == 'POST':
+        form = contactForm(request.POST)
+        if form.is_valid():
+            return HttpResponse('done')
+        else:
+            return HttpResponse('FUCK YOU')
+    form = contactForm()  
+    
     return render(request, 'test.html')
-
 
 def blog_category(request, cat_name):
 
