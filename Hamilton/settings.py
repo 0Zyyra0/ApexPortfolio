@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'Lewis44.apps.Lewis44Config',
     'blog',
+    'accounts',
 ]
 
 #sites framework
